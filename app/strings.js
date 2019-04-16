@@ -10,10 +10,10 @@ stringsAnswers = {
    * @returns {String} A string with no more than amount number of repeated letters.
    */
   reduceString: function reduceString(str, amount) {
-    var strArr = str.split('');
-    var newStr = [];
-    var check = '', count = 0;
-    strArr.forEach(function (elem) {
+    let strArr = str.split('');
+    let newStr = [];
+    let check = '', count = 0;
+    strArr.forEach(elem => {
       if (elem != check) {
         check = elem;
         count = 1;
@@ -35,8 +35,8 @@ stringsAnswers = {
    * @returns {String} The original string of text str reversed.
    */
   reverseString: function reverseString(str) {
-    var result = '';
-    for (var i = str.length - 1; i >= 0; i--) {
+    let result = '';
+    for (let i = str.length - 1; i >= 0; i--) {
       result += str[i];
     }
     return result;

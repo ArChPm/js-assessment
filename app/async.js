@@ -23,13 +23,13 @@ asyncAnswers = {
    * @returns {then: function} A promise like object containing a then property.
    */
   manipulateRemoteData: function manipulateRemoteData(url) {
-    var request = new XMLHttpRequest();
+    let request = new XMLHttpRequest();
       return {
-        then: function(callback) {
-          request.onreadystatechange = function(){
+        then: (callback) => {
+          request.onreadystatechange = () => {
             if (request.readyState == 4 && request.status >= 200 && request.status < 400) {
-              var result = JSON.parse(request.responseText);
-              var names = result["people"].map(function(item){
+              let result = JSON.parse(request.responseText);
+              let names = result["people"].map(function(item){
                 return item["name"]
               }).sort();
               return callback(names);

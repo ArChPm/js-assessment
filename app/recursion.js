@@ -1,4 +1,3 @@
-exports = (typeof window === 'undefined') ? global : window;
 recursionAnswers = {
   /**
    * List the files in a given directory, of a filesystem described by data.
@@ -18,31 +17,25 @@ recursionAnswers = {
    * @returns {Number[]} The files under the directory dirName, including subdiretories.
    */
   listFiles: function listFiles(data, dirName) {
-    var listOfFiles = [];
-    var dirs = [];
-
-    processDir(data);
-
-    function processDir(dir) {
-      var files = dir.files;
-
-      dirs.push(dir.dir);
-
-      for (var i = 0; i < files.length; i++) {
-        file = files[i];
-        if (typeof file === 'string') {
-          if (!dirName || dirs.indexOf(dirName) > -1) {
-            listOfFiles.push(files[i]);
-          }
+    let listOfFiles = [];
+    
+    processDir = dir => {
+      if(dir != undefined) {
+        if(dirName === dir.dirName || dirName === undefined) {
+          saveFiles(dir)
         } else {
-          processDir(files[i]);
+          dir.subDirs.forEach(dirTmp => processDir(dirTmp));
         }
       }
-
-      // One you reach the end of the current directory tree - Pop it!
-      dirs.pop();
     }
 
+    saveFiles = (dir) => {
+      if(dir != undefined) {
+        listOfFiles.push(...dir.files)
+        dir.subDirs.forEach(dirTmp => saveFiles(dirTmp));
+      }
+    }
+    processDir(data)
     return listOfFiles;
   },
 
@@ -56,9 +49,6 @@ recursionAnswers = {
    * @returns {Number} The nth fibonacci number
    */
   fibonacci: function fibonacci(n) {
-    function fib(n) {
-      return n < 2 ? n : fib(n - 1) + fib(n - 2);
-    }
-    return fib(n)
+    return n < 2 ? n : fibonacci(n - 1) + fibonacci(n - 2);
   },
 };
