@@ -32,8 +32,8 @@ arraysAnswers = {
   },
 
   removeWithoutCopy: function removeWithoutCopy(arr, item){
-    var arr2 = arr;
-    for(var i = arr2.length - 1; i >= 0; i--) {
+    let arr2 = arr;
+    for(let i = arr2.length - 1; i >= 0; i--) {
       if(arr2[i] === item) {
        arr2.splice(i, 1);
       }
